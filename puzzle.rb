@@ -14,10 +14,10 @@ class MyCache
     @mutex = Mutex.new
     @last_update = DateTime.new            # by default, -4732 BC
     @client = Twitter::REST::Client.new do |config|
-      config.consumer_key        = "QWIMPlplKgnAPDaw7t8zg"
-      config.consumer_secret     = "7zLkAu0ThOMPFl5wyIv0U2QPID9WK0UfzFRQlrZQfUY"
-      config.access_token        = "279382251-xUW4qVgceUD3BM61jk8FDgWJYPJp9QhTB9elGAVn"
-      config.access_token_secret = "lvzYltp9uneL8VqNOZikayPUVvxvQgqna12z0q56o"
+      config.consumer_key        = ""
+      config.consumer_secret     = ""
+      config.access_token        = ""
+      config.access_token_secret = ""
     end
   end
 
