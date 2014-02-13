@@ -6,17 +6,18 @@ require 'twitter'
 
 set :server, 'webrick'
 
-set :haml, :format => :html5
+set :html, :format => :html5
+set :public_folder, 'public'
 
 class MyCache
   def initialize()
     @mutex = Mutex.new
     @last_update = DateTime.new            # by default, -4732 BC
     @client = Twitter::REST::Client.new do |config|
-      config.consumer_key        = ""
-      config.consumer_secret     = ""
-      config.access_token        = ""
-      config.access_token_secret = ""
+      config.consumer_key        = "QWIMPlplKgnAPDaw7t8zg"
+      config.consumer_secret     = "7zLkAu0ThOMPFl5wyIv0U2QPID9WK0UfzFRQlrZQfUY"
+      config.access_token        = "279382251-xUW4qVgceUD3BM61jk8FDgWJYPJp9QhTB9elGAVn"
+      config.access_token_secret = "lvzYltp9uneL8VqNOZikayPUVvxvQgqna12z0q56o"
     end
   end
 
@@ -49,6 +50,7 @@ end
 my_cache = MyCache.new
 
 get '/' do
+  send_file 'public/index.html'
   content_type :json
   my_cache.get_cache
 end
