@@ -4,7 +4,7 @@ require 'date'
 require 'thread'
 require 'twitter'
 
-#set :server, 'webrick'
+set :server, 'unicorn'
 
 set :html, :format => :html5
 set :public_folder, 'public'
