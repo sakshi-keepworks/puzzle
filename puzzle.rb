@@ -4,6 +4,7 @@ require 'sinatra'
 require 'date'
 require 'thread'
 require 'twitter'
+require 'thin'
 
 set :server, 'unicorn'
 
