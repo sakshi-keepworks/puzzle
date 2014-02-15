@@ -25,7 +25,7 @@ class MyCache
         @last_update = DateTime.now
 
         arr = []
-        retweeters = @client.retweeters_of(429627812459593728)
+        retweeters = @client.retweeters_of(433267305544302593)
 
         retweeters.each do |retweeter|
           ob = {}
