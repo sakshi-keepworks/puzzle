@@ -1,0 +1,31 @@
+body 
+    {
+     background:url("http://puzzle.multunus.com/assets/watch_minimized-8f2f2b01514d433754b4f2c47d4cee58.png");
+     background-size:1500px 900px;
+     background-repeat:no-repeat;
+     padding-top:40px;
+     }
+     div.main-profile-image {
+     position: absolute;
+     width: 300px;
+     height: 300px;
+     margin-left: auto;
+     left: 450px;
+     top: 200px;
+     }
+     .squared{
+    -moz-border-radius: 300px/300px;
+    -webkit-border-radius: 300px 300px;
+    border-radius: 300px/300px;; 
+    width:300px;
+    height:300px;  
+     }
+     
+    .infulence-image{
+    -moz-border-radius: 100px/100px;
+    -webkit-border-radius: 100px 100px;
+    border-radius: 100px/100px;; 
+    width:100px;
+    height:100px;  
+     }
+}
