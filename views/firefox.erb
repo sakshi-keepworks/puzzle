@@ -1,0 +1,20 @@
+<HTML>
+  <HEAD>
+    <link href="<%= url('/style.css') %>" rel="stylesheet" type="text/css" />
+  </HEAD>
+    <body>
+      <div class="main-profile-image">
+        <img class="squared" src="http://pbs.twimg.com/profile_images/378800000324784929/1a4ee3fde80808a96ed268a7fb94682d.png">
+      </div>
+      <div class='radial-list'>
+  <% count = 1 %>
+      <% @cache[0..9].each do |result| %>
+        <a data-original-title='<%= count %>' data-placement='top' data-toggle='tooltip' href='#' title='<%= count %>' >
+          <img class='infulence-image' src='<%= result[:profile_image] %>'>
+        </a>
+        <% count = count+1 %>
+     <% end %>
+      </div>
+    </body>
+</HTML>
+
