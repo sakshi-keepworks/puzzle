@@ -1,0 +1,20 @@
+<HTML>
+  <HEAD>
+    <link href="<%= url('/style.css') %>" rel="stylesheet" type="text/css" />
+  </HEAD>
+    <body>
+      <div class="main-profile-image">
+        <img class="squared" src="<%= @cache[:user].profile_image_url_https  %>">
+      </div>
+      <div class='radial-list'>
+        <% count = 1 %>
+
+        <% @cache[:retweeters].each do |result| %>
+        <a data-original-title='<%= count %>' data-placement='top' data-toggle='tooltip' href='#'>
+          <img class='infulence-image' src='<%= result[:profile_image] %>' title = '<%= count %>'>
+        </a>
+        <% count = count+1 %>
+     <% end %>
+      </div>
+    </body>
+</HTML>

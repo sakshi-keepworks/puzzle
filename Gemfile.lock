@@ -68,7 +68,6 @@ PLATFORMS
 
 DEPENDENCIES
   heroku
-  json
   sinatra
   thin
   thread

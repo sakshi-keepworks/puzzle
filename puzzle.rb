@@ -1,8 +1,7 @@
 require 'rubygems'
-require 'json'
 require 'sinatra'
-require 'thread'
 require 'twitter'
+require 'thread'
 require 'thin'
 
 set :server, 'unicorn'
@@ -24,48 +23,44 @@ class MyCache
 
   def get_cache
     @mutex.synchronize do
-      if DateTime.now - @last_update > 10.0 / (3600 * 24)
+      if DateTime.now - @last_update > 13.0 / (3600 * 24)
         @last_update = DateTime.now
 
-        tweet = @client.user_timeline(@name)[0]
+        #Fetch the recent tweets of a twitter handle
+        tweets = @client.user_timeline(@name)
+        
+        # fix, (fetch the tweets with more than 10 retweeters) 
+        t = ""
 
-        @arr = []
-        retweeters = @client.retweeters_of(tweet.id)
+        tweets.each do |tweet|
+          if tweet.retweet_count > 10
+            t = tweet # the tweet with retweeters
+            break
+          end
+        end
+
+        @arr = [] # list of retweeters
+        retweeters = @client.retweeters_of(t.id)
 
         retweeters.each do |retweeter|
           ob = {}
-          ob[:profile_image] = retweeter.profile_image_url
+          ob[:profile_image] = retweeter.profile_image_url_https
           ob[:followers_count] = retweeter.followers_count
           @arr.push(ob)
         end
         
-        @cache = influencers(@arr)
-      
+        @arr = @arr.first(10)
+        @arr.sort_by! { |k| k[:followers_count] }
+        result = {}
+        result[:user] = t.user
+        result[:retweeters] = @arr.reverse
+        @cache = result
       end
       @cache
-    end
-    @cache
-  end
-
-      def influencers(array)
-        if @name == "BillGates" ||"firefox" || "twitter" || "github" || "timorielly" || "gvanrossum"
-          sorted_influencers = @arr.first(10).sort_by { |hsh| hsh[:followers_count] }
-        elsif @name == "dhh"
-          sorted_influencers = @arr[9..19].sort_by { |hsh| hsh[:followers_count] }
-        elsif @name == "martinfowler"
-          sorted_influencers = @arr.first(9).sort_by { |hsh| hsh[:followers_count] }
-        elsif @name == "spolsky"
-          sorted_influencers = @arr.sort_by { |hsh| hsh[:followers_count] }
-        end
-        sorted_influencers.reverse!
-        if @name == "martinfowler"
-          @cache = sorted_influencers[0..8]
-        else
-        @cache = sorted_influencers[0..9]
-        end
-        @cache
       end
-end
+  end
+    @cache
+end 
 
 get '/' do
   erb :index
@@ -74,5 +69,5 @@ end
 get '/:name' do |n|
   my_cache = MyCache.new(n)
   @cache = my_cache.get_cache
-  erb :"#{n}"
+  erb :"profile"
 end
