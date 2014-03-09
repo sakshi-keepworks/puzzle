@@ -1,4 +1,4 @@
-A Twiiter puzzle
+A Twitter puzzle
 ======
 
 This is the solution of a Twitter puzzle. It fetches a tweet of a user and displays the first 10 retweeters in the descending order of their no. of followers.
